@@ -19,11 +19,11 @@ object AppModule {
     }
 
     private val viewModelsModules = listOf(
-        ViewModels.module
+        ViewModelsModule.module
     )
 
     private val useCasesModule = listOf(
-        UseCases.module
+        UseCasesModule.module
     )
 
     val modules =

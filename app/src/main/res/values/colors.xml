@@ -3,7 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- LoadingView START-->
+    <!-- LoadingView-->
     <color name="loading_translucent">#B000</color>
-    <!-- LoadingView END -->
+
 </resources>
