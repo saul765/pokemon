@@ -1,0 +1,67 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    id "org.jetbrains.kotlin.kapt"
+    id "androidx.navigation.safeargs.kotlin" version "2.5.2"
+}
+
+android {
+    namespace 'com.ba.pokedex'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.ba.pokedex"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        dataBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.legacy.support.v4
+    implementation libs.androidx.lifecycle.livedata.ktx
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+    implementation libs.glide
+    implementation libs.androidx.lifecycle
+    implementation libs.androidx.lifecycle.viewmodel
+    implementation libs.retrofit
+    implementation libs.converterGson
+    implementation libs.loggingInterceptor
+    implementation libs.fragment
+    implementation libs.koin
+    implementation libs.koinWorkManager
+    implementation libs.mockitoInline
+    implementation libs.mockitoKotlin
+    implementation libs.coroutines
+    implementation libs.coroutinesPlayServices
+    implementation libs.navigationFragment
+    implementation libs.navigationUi
+}

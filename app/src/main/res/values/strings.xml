@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="generic_error">Ocurrió un error inesperado, por favor intenta de nuevo más tarde</string>
+    <string name="error_no_internet_connection_body">Asegúrate que la conexión Wi-Fi o los datos móviles estén activos y vuelve a intentarlo.</string>
+</resources>
