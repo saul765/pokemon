@@ -8,15 +8,12 @@ data class PokemonResultDTO(
     val count: Int?,
     val next: String?,
     val previous: String?,
-    val results: List<PokemonDTO?>? = emptyList()
+    val results: kotlin.collections.List<PokemonDTO?>? = emptyList()
 )
 
-
-fun PokemonResultDTO.toDomain(): PokemonResult {
-    return PokemonResult(
-        count = count ?: ZERO,
-        next = next.orEmpty(),
-        previous = previous.orEmpty(),
-        results = results?.map { it?.toDomain() ?: Pokemon() } ?: emptyList()
-    )
-}
+fun PokemonResultDTO.toDomain(): PokemonResult = PokemonResult(
+    count = count ?: ZERO,
+    next = next.orEmpty(),
+    previous = previous.orEmpty(),
+    results = results?.map { it?.toDomain() ?: Pokemon() } ?: emptyList()
+)

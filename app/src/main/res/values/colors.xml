@@ -6,4 +6,7 @@
     <!-- LoadingView-->
     <color name="loading_translucent">#B000</color>
 
+
+    <color name="pokedex_home_background">#DC0A2D</color>
+
 </resources>

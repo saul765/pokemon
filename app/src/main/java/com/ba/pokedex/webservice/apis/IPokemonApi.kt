@@ -1,8 +1,10 @@
 package com.ba.pokedex.webservice.apis
 
+import com.ba.pokedex.webservice.dto.responses.PokemonItemDTO
 import com.ba.pokedex.webservice.dto.responses.PokemonResultDTO
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface IPokemonApi {
 
@@ -21,4 +23,7 @@ interface IPokemonApi {
         @Query(LIMIT_PARAM) limit: Int,
         @Query(OFFSET_PARAM) offset: Int
     ): PokemonResultDTO
+
+    @GET
+    suspend fun getPokemonDetail(@Url pokemonUrl: String): PokemonItemDTO
 }

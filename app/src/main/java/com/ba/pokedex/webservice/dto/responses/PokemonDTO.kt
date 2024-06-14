@@ -7,9 +7,7 @@ data class PokemonDTO(
     val url: String?
 )
 
-fun PokemonDTO.toDomain(): Pokemon {
-    return Pokemon(
-        name = name.orEmpty(),
-        url = url.orEmpty()
-    )
-}
+fun PokemonDTO.toDomain(): Pokemon = Pokemon(
+    name = name.orEmpty(),
+    url = url.orEmpty()
+)

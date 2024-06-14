@@ -7,4 +7,9 @@
     <string name="error_no_internet_connection_body">Asegúrate que la conexión Wi-Fi o los datos móviles estén activos y vuelve a intentarlo.</string>
 
 
+    <string name="pokemon_home_title">Pokédex</string>
+    <string name="pokemon_item_content_description">Pokemon Image</string>
+    <string name="pokeball_image">TODO</string>
+    <string name="search_bard_text">Search</string>
+
 </resources>

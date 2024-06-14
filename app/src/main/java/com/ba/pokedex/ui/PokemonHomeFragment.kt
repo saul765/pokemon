@@ -3,18 +3,20 @@ package com.ba.pokedex.ui
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.ba.pokedex.R
 import com.ba.pokedex.base.BaseFragment
 import com.ba.pokedex.databinding.FragmentPokemonHomeBinding
-import com.ba.pokedex.domain.PokemonResult
+import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
+import com.ba.pokedex.ui.adapter.PokemonAdapter
 import com.ba.pokedex.utils.livedata.Event
 import com.ba.pokedex.webservice.utils.getErrorMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
 
-    private val pokemonObserver = Observer<Event<PokemonResult>> {
+    private val pokemonObserver = Observer<Event<List<PokemonItemUIModel>>> {
         onPokemonResult(it)
     }
 
@@ -35,7 +37,7 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
         viewModel.getPokemons()
     }
 
-    private fun onPokemonResult(result: Event<PokemonResult>) {
+    private fun onPokemonResult(result: Event<List<PokemonItemUIModel>>) {
         when (result) {
             is Event.Success -> {
                 onPokemonSuccess(result.data)
@@ -51,8 +53,12 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
         showAlert(throwable.getErrorMessage(requireContext()))
     }
 
-    private fun onPokemonSuccess(data: PokemonResult) {
-        Log.d("PokemonHomeFragment", "onPokemonSuccess: $data")
+    private fun onPokemonSuccess(data: List<PokemonItemUIModel>) {
+        with(dataBinding.rvPokemon) {
+            adapter = PokemonAdapter(data) {
+                Log.d("PokemonHomeFragment", "Pokemon name: ${it.name}")
+                Toast.makeText(requireContext(), it.name, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
-
 }
