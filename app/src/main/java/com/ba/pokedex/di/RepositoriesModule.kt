@@ -14,9 +14,10 @@ object RepositoriesModule {
         //Pokemon Repository
 
         single<IPokemonDataSource.Repository> { PokemonRepository(get(), get()) }
-        single<IPokemonDataSource.Remote> { PokemonRemoteDataSource(get()) }
-        single<IPokemonDataSource.Local> { PokemonLocalDataSource() }
 
+        single<IPokemonDataSource.Remote> { PokemonRemoteDataSource(get()) }
+
+        single<IPokemonDataSource.Local> { PokemonLocalDataSource(get()) }
 
     }
 }

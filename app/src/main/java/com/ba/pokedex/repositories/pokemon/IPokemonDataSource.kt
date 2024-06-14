@@ -1,5 +1,6 @@
 package com.ba.pokedex.repositories.pokemon
 
+import com.ba.pokedex.database.entity.PokemonEntity
 import com.ba.pokedex.domain.PokemonItem
 import com.ba.pokedex.domain.PokemonResult
 import com.ba.pokedex.webservice.dto.responses.PokemonItemDTO
@@ -14,13 +15,21 @@ interface IPokemonDataSource {
     }
 
     interface Local {
-        suspend fun getPokemons(limit: Int, offset: Int): PokemonResultDTO
+        suspend fun getPokemons(): List<PokemonEntity>
+
+        suspend fun savePokemons(pokemons: List<PokemonEntity>)
+
+        suspend fun getPokemonById(id: String): PokemonEntity
     }
 
     interface Repository {
         suspend fun getPokemonsAsync(limit: Int, offset: Int): PokemonResult
 
-        suspend fun getPokemonsLocal(limit: Int, offset: Int): PokemonResult
+        suspend fun getPokemonsLocal(): List<PokemonEntity>
+
+        suspend fun savePokemonsLocal(pokemons: List<PokemonEntity>)
+
+        suspend fun getPokemonByIdLocal(id: String): PokemonEntity
 
         suspend fun getPokemonDetailAsync(pokemonUrl: String): PokemonItem
     }

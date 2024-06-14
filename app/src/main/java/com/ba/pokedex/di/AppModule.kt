@@ -14,9 +14,11 @@ object AppModule {
         )
 
     private val myModule = module {
-
-
     }
+
+    private val databaseModule = listOf(
+        DatabaseModule.module
+    )
 
     private val viewModelsModules = listOf(
         ViewModelsModule.module
@@ -27,5 +29,5 @@ object AppModule {
     )
 
     val modules =
-        coreModules + myModule + viewModelsModules + useCasesModule
+        coreModules + myModule + viewModelsModules + useCasesModule + databaseModule
 }
