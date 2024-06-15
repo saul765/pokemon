@@ -17,10 +17,13 @@ class PokemonRepository(
     override suspend fun savePokemonsLocal(pokemons: List<PokemonEntity>) =
         localDataSource.savePokemons(pokemons)
 
-    override suspend fun getPokemonByIdLocal(id: String): PokemonEntity =
+    override suspend fun getPokemonByIdLocal(id: Int): PokemonEntity =
         localDataSource.getPokemonById(id)
 
     override suspend fun getPokemonDetailAsync(pokemonUrl: String): PokemonItem =
         remoteDataSource.getPokemonDetail(pokemonUrl).toDomain()
+
+    override suspend fun getTotalNumberOfPokemonsLocal(): Int =
+        localDataSource.getTotalNumberOfPokemons()
 
 }

@@ -10,6 +10,8 @@ interface IBaseView {
 
     fun showAlert(text: String)
 
+    fun showAlertWithTitle(title: String, text: String, okCallback: () -> Unit = {})
+
     fun getViewContext(): Context
 
     fun showLoading()

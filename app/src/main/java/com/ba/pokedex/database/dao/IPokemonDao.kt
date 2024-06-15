@@ -12,10 +12,13 @@ interface IPokemonDao {
     suspend fun saveAll(entities: List<PokemonEntity>)
 
     @Query("SELECT * FROM pokemons WHERE id = :id")
-    suspend fun findPokemonById(id: String): PokemonEntity
+    suspend fun findPokemonById(id: Int): PokemonEntity
 
     @Query("SELECT * FROM pokemons")
     suspend fun findAll(): List<PokemonEntity>
+
+    @Query("SELECT COUNT(*) FROM pokemons")
+    suspend fun getTotalNumberOfPokemons(): Int
 
 
 }

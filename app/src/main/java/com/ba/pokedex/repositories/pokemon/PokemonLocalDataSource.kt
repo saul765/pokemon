@@ -8,5 +8,7 @@ class PokemonLocalDataSource(private val pokemonDAO: IPokemonDao) : IPokemonData
 
     override suspend fun savePokemons(pokemons: List<PokemonEntity>) = pokemonDAO.saveAll(pokemons)
 
-    override suspend fun getPokemonById(id: String): PokemonEntity = pokemonDAO.findPokemonById(id)
+    override suspend fun getPokemonById(id: Int): PokemonEntity = pokemonDAO.findPokemonById(id)
+
+    override suspend fun getTotalNumberOfPokemons(): Int = pokemonDAO.getTotalNumberOfPokemons()
 }

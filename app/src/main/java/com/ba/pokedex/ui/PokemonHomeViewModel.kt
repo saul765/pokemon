@@ -1,5 +1,6 @@
 package com.ba.pokedex.ui
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ba.pokedex.base.BaseViewModel
@@ -15,13 +16,13 @@ class PokemonHomeViewModel(private val getPokemonUseCase: IGetHomePokemonUseCase
 
     val getPokemonEvent = MutableLiveData<Event<List<PokemonItemUIModel>>>()
 
-    fun getPokemons() {
+    fun getPokemons(context: Context) {
         viewModelScope.launch(contextProvider.getMainContext()) {
             showProgress()
 
             try {
                 val result = withContext(contextProvider.getIoContext()) {
-                    getPokemonUseCase.execute()
+                    getPokemonUseCase.execute(context)
                 }
 
                 getPokemonEvent.value = Event.Success(result)

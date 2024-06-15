@@ -14,7 +14,6 @@ import com.ba.pokedex.databinding.FragmentPokemonHomeBinding
 import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
 import com.ba.pokedex.ui.adapter.PokemonAdapter
 import com.ba.pokedex.utils.livedata.Event
-import com.ba.pokedex.utils.notifications.INotificationService
 import com.ba.pokedex.utils.permissions.IPermissionService
 import com.ba.pokedex.webservice.utils.getErrorMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,9 +24,6 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
     private val viewModel: PokemonHomeViewModel by viewModel()
 
     private val permissionService: IPermissionService by inject()
-
-    private val notificationService: INotificationService by inject()
-
 
     private val pokemonObserver = Observer<Event<List<PokemonItemUIModel>>> {
         onPokemonResult(it)
@@ -44,12 +40,10 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
 
     override fun initView(inflater: LayoutInflater, container: ViewGroup?) {
         super.initView(inflater, container)
-        viewModel.getPokemons()
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             checkPermissions()
         } else {
-            notificationService.showNotification("Title", "Message")
+            viewModel.getPokemons(requireContext())
         }
     }
 
@@ -84,7 +78,7 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
                 requireContext(),
                 android.Manifest.permission.POST_NOTIFICATIONS
             ) == PackageManager.PERMISSION_GRANTED -> {
-                notificationService.showNotification("Title", "Message")
+                viewModel.getPokemons(requireContext())
             }
 
             else -> {
@@ -94,10 +88,13 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
                     onRationale = {
                     },
                     onGranted = {
-                        notificationService.showNotification("Title", "Message")
+                        viewModel.getPokemons(requireContext())
                     },
                     onDenied = {
-                        showAlert("Denied")
+                        showAlertWithTitle(
+                            getString(R.string.pokemon_worker_error_notification_title),
+                            getString(R.string.pokemon_worker_error_notification_body)
+                        )
                     }
                 )
             }

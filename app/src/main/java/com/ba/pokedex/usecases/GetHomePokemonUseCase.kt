@@ -1,13 +1,16 @@
 package com.ba.pokedex.usecases
 
+import android.content.Context
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.ba.pokedex.database.entity.toUIModel
 import com.ba.pokedex.domain.toEntity
-import com.ba.pokedex.domain.toUIModel
 import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
 import com.ba.pokedex.repositories.pokemon.IPokemonDataSource
+import com.ba.pokedex.workers.PokemonWorker
 
 interface IGetHomePokemonUseCase {
-    suspend fun execute(): List<PokemonItemUIModel>
+    suspend fun execute(context: Context): List<PokemonItemUIModel>
 }
 
 class GetHomePokemonUseCase(private val pokemonRepository: IPokemonDataSource.Repository) :
@@ -17,7 +20,7 @@ class GetHomePokemonUseCase(private val pokemonRepository: IPokemonDataSource.Re
         const val POKEMON_OFFSET = 0
     }
 
-    override suspend fun execute(): List<PokemonItemUIModel> {
+    override suspend fun execute(context: Context): List<PokemonItemUIModel> {
 
         if (pokemonRepository.getPokemonsLocal().isEmpty()) {
 
@@ -35,11 +38,19 @@ class GetHomePokemonUseCase(private val pokemonRepository: IPokemonDataSource.Re
                 pokemonItem.toEntity()
             }
             pokemonRepository.savePokemonsLocal(pokemonEntities)
+
+            // Load the rest of the pokemons in the background
+            pokedexLoadBatch(context)
         }
 
         return pokemonRepository.getPokemonsLocal().map { pokemonEntity ->
             pokemonEntity.toUIModel()
         }
+    }
+
+    private fun pokedexLoadBatch(context: Context) {
+        val workRequest = OneTimeWorkRequestBuilder<PokemonWorker>().build()
+        WorkManager.getInstance(context).enqueue(workRequest)
     }
 
 }

@@ -19,7 +19,9 @@ interface IPokemonDataSource {
 
         suspend fun savePokemons(pokemons: List<PokemonEntity>)
 
-        suspend fun getPokemonById(id: String): PokemonEntity
+        suspend fun getPokemonById(id: Int): PokemonEntity
+
+        suspend fun getTotalNumberOfPokemons(): Int
     }
 
     interface Repository {
@@ -29,8 +31,10 @@ interface IPokemonDataSource {
 
         suspend fun savePokemonsLocal(pokemons: List<PokemonEntity>)
 
-        suspend fun getPokemonByIdLocal(id: String): PokemonEntity
+        suspend fun getPokemonByIdLocal(id: Int): PokemonEntity
 
         suspend fun getPokemonDetailAsync(pokemonUrl: String): PokemonItem
+
+        suspend fun getTotalNumberOfPokemonsLocal(): Int
     }
 }

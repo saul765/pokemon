@@ -92,6 +92,20 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment(), IBaseView, KoinC
         }
     }
 
+    override fun showAlertWithTitle(title: String, text: String, okCallback: () -> Unit) {
+        activity?.let {
+            if (isActive() && !it.isFinishing) {
+                AlertDialog.Builder(getViewContext())
+                    .setTitle(title)
+                    .setMessage(text)
+                    .setPositiveButton(android.R.string.ok) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create().show()
+            }
+        }
+    }
+
     override fun getViewContext(): Context = fragmentContext
 
     override fun showLoading() = loadingView.showLoading(activity?.window)

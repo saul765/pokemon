@@ -72,6 +72,20 @@ abstract class BaseActivity<DB : ViewDataBinding> : AppCompatActivity(), IBaseVi
         }
     }
 
+    override fun showAlertWithTitle(title: String, text: String, okCallback: () -> Unit) {
+        if (isActive()) {
+            AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(text)
+                .setNeutralButton(android.R.string.ok) { dialog, _ ->
+                    dialog.dismiss()
+                    okCallback()
+                }
+                .create().show()
+        }
+
+    }
+
     override fun getViewContext(): Context = this
 
     override fun showLoading() = loadingView.showLoading(window)

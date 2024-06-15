@@ -3,12 +3,21 @@
 
     <string name="pokemon_base_url">https://pokeapi.co/api/v2/</string>
 
-    <string name="generic_error">Ocurrió un error inesperado, por favor intenta de nuevo más tarde</string>
-    <string name="error_no_internet_connection_body">Asegúrate que la conexión Wi-Fi o los datos móviles estén activos y vuelve a intentarlo.</string>
+    <string name="generic_error">An unexpected error occurred, please try again later</string>
+    <string name="error_no_internet_connection_body">Make sure that the Wi-Fi connection or mobile data is active and try again.</string>
+
+    <string name="pokemon_permission_denied_notifications_title">Important Advice!</string>
+    <string name="pokemon_permission_denied_notifications_message">Notifications is an important feature for you to stay tuned to last Pokédex updates</string>
 
     <string name="pokemon_home_title">Pokédex</string>
     <string name="pokemon_item_content_description">Pokemon Image</string>
     <string name="pokeball_image_content_description">Pokeball Image</string>
     <string name="search_bar_text">Search</string>
+
+    <string name="pokemon_worker_notification_title">New Pokemons!</string>
+    <string name="pokemon_worker_notification_body">New Pokemons have been added to the Pokédex, Now you have %1s registered!</string>
+
+    <string name="pokemon_worker_error_notification_title">Pokedex Load Error</string>
+    <string name="pokemon_worker_error_notification_body">An error occurred while trying to update the Pokédex, check you internet connection</string>
 
 </resources>
