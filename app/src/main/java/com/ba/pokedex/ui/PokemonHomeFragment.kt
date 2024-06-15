@@ -1,9 +1,12 @@
 package com.ba.pokedex.ui
 
-import android.util.Log
+import android.content.pm.PackageManager
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.ba.pokedex.R
 import com.ba.pokedex.base.BaseFragment
@@ -11,16 +14,24 @@ import com.ba.pokedex.databinding.FragmentPokemonHomeBinding
 import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
 import com.ba.pokedex.ui.adapter.PokemonAdapter
 import com.ba.pokedex.utils.livedata.Event
+import com.ba.pokedex.utils.notifications.INotificationService
+import com.ba.pokedex.utils.permissions.IPermissionService
 import com.ba.pokedex.webservice.utils.getErrorMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.inject
 
 class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
+
+    private val viewModel: PokemonHomeViewModel by viewModel()
+
+    private val permissionService: IPermissionService by inject()
+
+    private val notificationService: INotificationService by inject()
+
 
     private val pokemonObserver = Observer<Event<List<PokemonItemUIModel>>> {
         onPokemonResult(it)
     }
-
-    private val viewModel: PokemonHomeViewModel by viewModel()
 
     override fun getLayoutId(): Int = R.layout.fragment_pokemon_home
 
@@ -31,10 +42,15 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
         viewModel.isLoadingEvent.observe(viewLifecycleOwner, isLoadingObserver)
     }
 
-
     override fun initView(inflater: LayoutInflater, container: ViewGroup?) {
         super.initView(inflater, container)
         viewModel.getPokemons()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            checkPermissions()
+        } else {
+            notificationService.showNotification("Title", "Message")
+        }
     }
 
     private fun onPokemonResult(result: Event<List<PokemonItemUIModel>>) {
@@ -56,8 +72,34 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
     private fun onPokemonSuccess(data: List<PokemonItemUIModel>) {
         with(dataBinding.rvPokemon) {
             adapter = PokemonAdapter(data) {
-                Log.d("PokemonHomeFragment", "Pokemon name: ${it.name}")
                 Toast.makeText(requireContext(), it.name, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun checkPermissions() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                notificationService.showNotification("Title", "Message")
+            }
+
+            else -> {
+                permissionService.runWithPermission(
+                    this,
+                    android.Manifest.permission.POST_NOTIFICATIONS,
+                    onRationale = {
+                    },
+                    onGranted = {
+                        notificationService.showNotification("Title", "Message")
+                    },
+                    onDenied = {
+                        showAlert("Denied")
+                    }
+                )
             }
         }
     }

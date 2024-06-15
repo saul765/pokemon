@@ -1,5 +1,9 @@
 package com.ba.pokedex.di
 
+import com.ba.pokedex.utils.notifications.INotificationService
+import com.ba.pokedex.utils.notifications.NotificationService
+import com.ba.pokedex.utils.permissions.IPermissionService
+import com.ba.pokedex.utils.permissions.PermissionService
 import org.koin.dsl.module
 
 
@@ -14,6 +18,11 @@ object AppModule {
         )
 
     private val myModule = module {
+
+        single<INotificationService> { NotificationService() }
+
+        single<IPermissionService> { PermissionService() }
+
     }
 
     private val databaseModule = listOf(
