@@ -2,20 +2,27 @@ package com.ba.pokedex.ui
 
 import android.content.pm.PackageManager
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.ba.pokedex.R
 import com.ba.pokedex.base.BaseFragment
 import com.ba.pokedex.databinding.FragmentPokemonHomeBinding
 import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
+import com.ba.pokedex.ui.adapter.MainLoadStateAdapter
 import com.ba.pokedex.ui.adapter.PokemonAdapter
+import com.ba.pokedex.ui.adapter.PokemonPagingAdapter
 import com.ba.pokedex.utils.livedata.Event
 import com.ba.pokedex.utils.permissions.IPermissionService
 import com.ba.pokedex.webservice.utils.getErrorMessage
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.inject
 
@@ -43,7 +50,8 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             checkPermissions()
         } else {
-            viewModel.getPokemons(requireContext())
+            viewModel.getFirst15Pokemons(requireContext())
+            // loadAllPokemons()
         }
     }
 
@@ -64,11 +72,12 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
     }
 
     private fun onPokemonSuccess(data: List<PokemonItemUIModel>) {
-        with(dataBinding.rvPokemon) {
-            adapter = PokemonAdapter(data) {
-                Toast.makeText(requireContext(), it.name, Toast.LENGTH_SHORT).show()
-            }
-        }
+        /* with(dataBinding.rvPokemon) {
+             adapter = PokemonAdapter(data) {
+                 Toast.makeText(requireContext(), it.name, Toast.LENGTH_SHORT).show()
+             }
+         } */
+        loadAllPokemons()
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -78,7 +87,8 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
                 requireContext(),
                 android.Manifest.permission.POST_NOTIFICATIONS
             ) == PackageManager.PERMISSION_GRANTED -> {
-                viewModel.getPokemons(requireContext())
+                viewModel.getFirst15Pokemons(requireContext())
+                //loadAllPokemons()
             }
 
             else -> {
@@ -88,7 +98,9 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
                     onRationale = {
                     },
                     onGranted = {
-                        viewModel.getPokemons(requireContext())
+                        viewModel.getFirst15Pokemons(requireContext())
+
+                        //loadAllPokemons()
                     },
                     onDenied = {
                         showAlertWithTitle(
@@ -97,6 +109,21 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
                         )
                     }
                 )
+            }
+        }
+    }
+
+    private fun loadAllPokemons() {
+        val adapter = PokemonPagingAdapter {
+        }
+        dataBinding.rvPokemon.adapter = adapter.withLoadStateFooter(
+            MainLoadStateAdapter()
+        )
+
+        lifecycleScope.launch {
+            viewModel.pokemonFlow2.collectLatest {
+                Log.d("PokemonHomeFragment", "PokemonFlow: $it")
+                adapter.submitData(it)
             }
         }
     }

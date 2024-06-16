@@ -1,5 +1,6 @@
 package com.ba.pokedex.di
 
+import com.ba.pokedex.ui.adapter.PokemonPagingSource
 import com.ba.pokedex.utils.notifications.INotificationService
 import com.ba.pokedex.utils.notifications.NotificationService
 import com.ba.pokedex.utils.permissions.IPermissionService
@@ -22,6 +23,8 @@ object AppModule {
         single<INotificationService> { NotificationService() }
 
         single<IPermissionService> { PermissionService() }
+
+        single { PokemonPagingSource(get(), get()) }
 
     }
 

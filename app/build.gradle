@@ -74,6 +74,8 @@ dependencies {
     implementation libs.workManager
     implementation libs.workManagerTesting
     implementation libs.roboelectric
+    implementation libs.paging
+    implementation libs.roomPaging
 
 
 }
