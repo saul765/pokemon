@@ -10,7 +10,7 @@ import com.ba.pokedex.repositories.pokemon.IPokemonDataSource
 import com.ba.pokedex.workers.PokemonWorker
 
 interface IGetHomePokemonUseCase {
-    suspend fun execute(context: Context): List<PokemonItemUIModel>
+    suspend fun execute(context: Context)
 }
 
 class GetHomePokemonUseCase(private val pokemonRepository: IPokemonDataSource.Repository) :
@@ -20,7 +20,7 @@ class GetHomePokemonUseCase(private val pokemonRepository: IPokemonDataSource.Re
         const val POKEMON_OFFSET = 0
     }
 
-    override suspend fun execute(context: Context): List<PokemonItemUIModel> {
+    override suspend fun execute(context: Context) {
 
         if (pokemonRepository.getPokemonsLocal().isEmpty()) {
 
@@ -41,10 +41,6 @@ class GetHomePokemonUseCase(private val pokemonRepository: IPokemonDataSource.Re
 
             // Load the rest of the pokemons in the background
             pokedexLoadBatch(context)
-        }
-
-        return pokemonRepository.getPokemonsLocal().map { pokemonEntity ->
-            pokemonEntity.toUIModel()
         }
     }
 

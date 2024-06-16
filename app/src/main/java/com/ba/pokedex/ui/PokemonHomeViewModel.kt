@@ -16,13 +16,13 @@ import kotlinx.coroutines.withContext
 
 class PokemonHomeViewModel(
     private val getHomePokemonUseCase: IGetHomePokemonUseCase,
-    private val getPokemon2UseCase: IGetPokemonUseCase
+    getPagedPokemonUseCase: IGetPokemonUseCase
 ) :
     BaseViewModel() {
 
-    val getPokemonEvent = MutableLiveData<Event<List<PokemonItemUIModel>>>()
+    val getPokemonEvent = MutableLiveData<Event<Unit>>()
 
-    val pokemonFlow: Flow<PagingData<PokemonItemUIModel>> = getPokemon2UseCase.execute()
+    val pokemonFlow: Flow<PagingData<PokemonItemUIModel>> = getPagedPokemonUseCase.execute()
         .cachedIn(viewModelScope)
 
     fun getFirst15Pokemons(context: Context) {
@@ -30,11 +30,10 @@ class PokemonHomeViewModel(
             showProgress()
 
             try {
-                val result = withContext(contextProvider.getIoContext()) {
+                withContext(contextProvider.getIoContext()) {
                     getHomePokemonUseCase.execute(context)
                 }
-
-                getPokemonEvent.value = Event.Success(result)
+                getPokemonEvent.value = Event.Success(Unit)
             } catch (t: Throwable) {
                 getPokemonEvent.value = Event.Failure(t)
             } finally {

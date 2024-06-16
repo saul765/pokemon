@@ -12,26 +12,36 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="165dp"
+        android:layout_height="@dimen/spacing_165dp"
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{_ -> pokemonItem.onPokemonClick()}"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="@dimen/spacing_8dp"
+        app:cardElevation="@dimen/spacing_4dp"
         app:cardUseCompatPadding="true"
-        tools:layout_height="165dp"
-        tools:layout_width="120dp">
+        tools:layout_height="@dimen/spacing_165dp"
+        tools:layout_width="@dimen/spacing_120dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingVertical="5dp">
+            android:background="@color/white"
+            android:paddingTop="@dimen/spacing_4dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_60dp"
+                android:background="@drawable/rectangle_with_corners"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tvPokemonNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginTop="@dimen/spacing_3dp"
+                android:layout_marginEnd="@dimen/spacing_10dp"
                 android:text="@{pokemonItem.pokemonId}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,8 +50,8 @@
             <ImageView
                 android:id="@+id/ivPokemonImage"
                 android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="@dimen/spacing_70dp"
+                android:layout_marginTop="@dimen/spacing_20dp"
                 android:contentDescription="@string/pokemon_item_content_description"
                 app:imageUrl="@{pokemonItem.pokemonImageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,13 +63,14 @@
                 android:id="@+id/tvPokemonName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
+                android:layout_marginTop="@dimen/spacing_3dp"
                 android:text="@{pokemonItem.pokemonName}"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_16sp"
                 app:layout_constraintEnd_toEndOf="@+id/ivPokemonImage"
                 app:layout_constraintStart_toStartOf="@+id/ivPokemonImage"
                 app:layout_constraintTop_toBottomOf="@+id/ivPokemonImage"
                 tools:text="Bulbasaur" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

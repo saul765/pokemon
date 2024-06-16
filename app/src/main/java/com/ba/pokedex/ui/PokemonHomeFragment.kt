@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import com.ba.pokedex.R
 import com.ba.pokedex.base.BaseFragment
 import com.ba.pokedex.databinding.FragmentPokemonHomeBinding
-import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
 import com.ba.pokedex.ui.adapter.MainLoadStateAdapter
 import com.ba.pokedex.ui.adapter.PokemonPagingAdapter
 import com.ba.pokedex.utils.livedata.Event
@@ -28,7 +27,7 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
 
     private val permissionService: IPermissionService by inject()
 
-    private val pokemonObserver = Observer<Event<List<PokemonItemUIModel>>> {
+    private val pokemonObserver = Observer<Event<Unit>> {
         onPokemonResult(it)
     }
 
@@ -47,14 +46,13 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
             checkPermissions()
         } else {
             viewModel.getFirst15Pokemons(requireContext())
-            // loadAllPokemons()
         }
     }
 
-    private fun onPokemonResult(result: Event<List<PokemonItemUIModel>>) {
+    private fun onPokemonResult(result: Event<Unit>) {
         when (result) {
             is Event.Success -> {
-                onPokemonSuccess(result.data)
+                onPokemonSuccess()
             }
 
             is Event.Failure -> {
@@ -67,12 +65,7 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
         showAlert(throwable.getErrorMessage(requireContext()))
     }
 
-    private fun onPokemonSuccess(data: List<PokemonItemUIModel>) {
-        /* with(dataBinding.rvPokemon) {
-             adapter = PokemonAdapter(data) {
-                 Toast.makeText(requireContext(), it.name, Toast.LENGTH_SHORT).show()
-             }
-         } */
+    private fun onPokemonSuccess() {
         loadAllPokemons()
     }
 
@@ -84,7 +77,6 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
                 android.Manifest.permission.POST_NOTIFICATIONS
             ) == PackageManager.PERMISSION_GRANTED -> {
                 viewModel.getFirst15Pokemons(requireContext())
-                //loadAllPokemons()
             }
 
             else -> {
@@ -95,8 +87,6 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
                     },
                     onGranted = {
                         viewModel.getFirst15Pokemons(requireContext())
-
-                        //loadAllPokemons()
                     },
                     onDenied = {
                         showAlertWithTitle(
