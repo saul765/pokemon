@@ -2,10 +2,8 @@ package com.ba.pokedex.ui
 
 import android.content.pm.PackageManager
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -15,12 +13,10 @@ import com.ba.pokedex.base.BaseFragment
 import com.ba.pokedex.databinding.FragmentPokemonHomeBinding
 import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
 import com.ba.pokedex.ui.adapter.MainLoadStateAdapter
-import com.ba.pokedex.ui.adapter.PokemonAdapter
 import com.ba.pokedex.ui.adapter.PokemonPagingAdapter
 import com.ba.pokedex.utils.livedata.Event
 import com.ba.pokedex.utils.permissions.IPermissionService
 import com.ba.pokedex.webservice.utils.getErrorMessage
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -121,8 +117,7 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
         )
 
         lifecycleScope.launch {
-            viewModel.pokemonFlow2.collectLatest {
-                Log.d("PokemonHomeFragment", "PokemonFlow: $it")
+            viewModel.pokemonFlow.collectLatest {
                 adapter.submitData(it)
             }
         }
