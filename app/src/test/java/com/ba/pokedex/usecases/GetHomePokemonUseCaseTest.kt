@@ -1,7 +1,7 @@
 package com.ba.pokedex.usecases
 
 import androidx.work.testing.WorkManagerTestInitHelper
-import com.ba.pokedex.base.BaseUnitTestNoKoin
+import com.ba.pokedex.base.BaseUnitTest
 import com.ba.pokedex.data.EMPTY_CHARACTER
 import com.ba.pokedex.database.entity.PokemonEntity
 import com.ba.pokedex.domain.Pokemon
@@ -20,7 +20,7 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-class GetHomePokemonUseCaseTest : BaseUnitTestNoKoin() {
+class GetHomePokemonUseCaseTest : BaseUnitTest() {
 
     private val pokemonRepository by lazy { declareMock<IPokemonDataSource.Repository>() }
     private val pokemonHomeUseCaseMock by lazy { declareMock<GetHomePokemonUseCase>() }

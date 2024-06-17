@@ -2,7 +2,6 @@ package com.ba.pokedex.ui.home
 
 import androidx.paging.PagingData
 import com.ba.pokedex.base.BaseUnitTest
-import com.ba.pokedex.base.BaseUnitTestNoKoin
 import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
 import com.ba.pokedex.ui.PokemonHomeViewModel
 import com.ba.pokedex.usecases.IGetHomePokemonUseCase
@@ -24,7 +23,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import retrofit2.HttpException
 
-class PokemonHomeViewModelTest : BaseUnitTestNoKoin() {
+class PokemonHomeViewModelTest : BaseUnitTest() {
 
 
     private val pokemonHomeUseCase by lazy { declareMock<IGetHomePokemonUseCase>() }
@@ -53,7 +52,6 @@ class PokemonHomeViewModelTest : BaseUnitTestNoKoin() {
             doReturn(Unit).whenever(pokemonHomeUseCase).execute(any())
 
             viewModel.getFirst15Pokemons(context)
-            println(viewModel.getPokemonEvent.value)
             val eventSuccess = viewModel.getPokemonEvent.value as Event.Success
             assertEquals(Unit, eventSuccess.data)
             verify(pokemonHomeUseCase, times(1)).execute(any())

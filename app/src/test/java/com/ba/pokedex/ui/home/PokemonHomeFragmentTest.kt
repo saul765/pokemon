@@ -1,7 +1,7 @@
 package com.ba.pokedex.ui.home
 
 import androidx.fragment.app.testing.launchFragment
-import com.ba.pokedex.base.BaseUnitTestNoKoin
+import com.ba.pokedex.base.BaseUnitTest
 import com.ba.pokedex.ui.PokemonHomeFragment
 import com.ba.pokedex.ui.PokemonHomeViewModel
 import com.ba.pokedex.utils.livedata.Event
@@ -15,7 +15,7 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-class PokemonHomeFragmentTest : BaseUnitTestNoKoin() {
+class PokemonHomeFragmentTest : BaseUnitTest() {
 
     val mockViewModel = mock<PokemonHomeViewModel>()
 

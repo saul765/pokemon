@@ -67,7 +67,12 @@ dependencies {
     testImplementation libs.roboelectric
     testImplementation libs.workManagerTesting
     debugImplementation libs.fragmentTesting
-    testImplementation libs.coreTesting
+    debugImplementation libs.coreTesting
+    testImplementation libs.koinTestJUnit4
+    testImplementation libs.koinTest
+    testImplementation libs.mockitoKotlin
+    testImplementation libs.mockitoInline
+    testImplementation libs.workManagerTesting
 
 
     implementation libs.glide
@@ -79,11 +84,7 @@ dependencies {
     implementation libs.loggingInterceptor
     implementation libs.fragment
     implementation libs.koin
-    implementation libs.koinTestJUnit4
     implementation libs.koinWorkManager
-    implementation libs.koinTest
-    implementation libs.mockitoInline
-    implementation libs.mockitoKotlin
     implementation libs.coroutines
     implementation libs.coroutinesPlayServices
     implementation libs.navigationFragment
@@ -92,7 +93,6 @@ dependencies {
     implementation libs.roomKtx
     kapt libs.roomCompiler
     implementation libs.workManager
-    implementation libs.workManagerTesting
     implementation libs.paging
     implementation libs.roomPaging
 

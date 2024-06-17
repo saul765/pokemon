@@ -1,6 +1,6 @@
 package com.ba.pokedex.usecases
 
-import com.ba.pokedex.base.BaseUnitTestNoKoin
+import com.ba.pokedex.base.BaseUnitTest
 import com.ba.pokedex.repositories.pokemon.IPokemonDataSource
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -12,7 +12,7 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-class GetPokemonUseCaseTest : BaseUnitTestNoKoin() {
+class GetPokemonUseCaseTest : BaseUnitTest() {
 
     private val pokemonRepository by lazy { declareMock<IPokemonDataSource.Repository>() }
 

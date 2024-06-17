@@ -25,7 +25,9 @@ abstract class BaseUnitTest : KoinTest {
     val context: Context by lazy { InstrumentationRegistry.getInstrumentation().targetContext }
 
     init {
+        stopKoin()
         startKoin {
+
             androidContext(context)
             modules(TestModules.modules)
         }

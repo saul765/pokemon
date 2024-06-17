@@ -1,6 +1,6 @@
 package com.ba.pokedex.usecases
 
-import com.ba.pokedex.base.BaseUnitTestNoKoin
+import com.ba.pokedex.base.BaseUnitTest
 import com.ba.pokedex.data.EMPTY_CHARACTER
 import com.ba.pokedex.domain.Pokemon
 import com.ba.pokedex.domain.PokemonItem
@@ -18,7 +18,7 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-class WorkerPokemonUseCaseTest : BaseUnitTestNoKoin() {
+class WorkerPokemonUseCaseTest : BaseUnitTest() {
 
     private val pokemonRepository by lazy { declareMock<IPokemonDataSource.Repository>() }
 
