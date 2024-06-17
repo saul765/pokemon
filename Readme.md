@@ -18,9 +18,9 @@ The application includes the following features:
 ## Screenshots
 ![pokedex-inspiration.png](images%2Fpokedex-inspiration.png)
 
-![Screenshot_20240617_132320.png](images%2FScreenshot_20240617_132320.png)
+![Screenshot_20240617_132320-ezgif.com-resize.png](images%2FScreenshot_20240617_132320-ezgif.com-resize.png)
 
-![Screenshot_20240617_132340.png](images%2FScreenshot_20240617_132340.png)
+![Screenshot_20240617_132340-ezgif.com-resize.png](images%2FScreenshot_20240617_132340-ezgif.com-resize.png)
 
 ## Getting Started
 
