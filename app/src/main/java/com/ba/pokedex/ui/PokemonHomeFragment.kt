@@ -2,6 +2,8 @@ package com.ba.pokedex.ui
 
 import android.content.pm.PackageManager
 import android.os.Build
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
@@ -45,11 +47,31 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
 
     override fun initView(inflater: LayoutInflater, container: ViewGroup?) {
         super.initView(inflater, container)
+        setUpSearchBarListeners()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             checkPermissions()
         } else {
             viewModel.getFirst15Pokemons(requireContext())
         }
+    }
+
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun setUpSearchBarListeners() {
+
+        dataBinding.etPokemonBar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.isEmpty()) {
+                    dataBinding.etPokemonBar.setCursorVisible(false)
+                }
+            }
+        })
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
