@@ -1,11 +1,10 @@
 package com.ba.pokedex.usecases
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.ba.pokedex.database.entity.toUIModel
 import com.ba.pokedex.domain.toEntity
-import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
 import com.ba.pokedex.repositories.pokemon.IPokemonDataSource
 import com.ba.pokedex.workers.PokemonWorker
 
@@ -44,7 +43,8 @@ class GetHomePokemonUseCase(private val pokemonRepository: IPokemonDataSource.Re
         }
     }
 
-    private fun pokedexLoadBatch(context: Context) {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun pokedexLoadBatch(context: Context) {
         val workRequest = OneTimeWorkRequestBuilder<PokemonWorker>().build()
         WorkManager.getInstance(context).enqueue(workRequest)
     }

@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -23,9 +24,11 @@ import org.koin.core.component.inject
 
 class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
 
-    private val viewModel: PokemonHomeViewModel by viewModel()
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    val viewModel: PokemonHomeViewModel by viewModel()
 
-    private val permissionService: IPermissionService by inject()
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    val permissionService: IPermissionService by inject()
 
     private val pokemonObserver = Observer<Event<Unit>> {
         onPokemonResult(it)
@@ -49,7 +52,8 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
         }
     }
 
-    private fun onPokemonResult(result: Event<Unit>) {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun onPokemonResult(result: Event<Unit>) {
         when (result) {
             is Event.Success -> {
                 onPokemonSuccess()
@@ -61,16 +65,19 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
         }
     }
 
-    private fun onPokemonFailure(throwable: Throwable) {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun onPokemonFailure(throwable: Throwable) {
         showAlert(throwable.getErrorMessage(requireContext()))
     }
 
-    private fun onPokemonSuccess() {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun onPokemonSuccess() {
         loadAllPokemons()
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun checkPermissions() {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun checkPermissions() {
         when {
             ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -99,7 +106,8 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
         }
     }
 
-    private fun loadAllPokemons() {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun loadAllPokemons() {
         val adapter = PokemonPagingAdapter {
         }
         dataBinding.rvPokemon.adapter = adapter.withLoadStateFooter(

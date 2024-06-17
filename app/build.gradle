@@ -23,17 +23,28 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "11"
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
     }
 }
 
@@ -47,9 +58,18 @@ dependencies {
     implementation libs.androidx.legacy.support.v4
     implementation libs.androidx.lifecycle.livedata.ktx
     implementation libs.androidx.junit.ktx
+
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
+    testImplementation libs.testRules
+    testImplementation libs.testRunner
+    testImplementation libs.roboelectric
+    testImplementation libs.workManagerTesting
+    debugImplementation libs.fragmentTesting
+    testImplementation libs.coreTesting
+
+
     implementation libs.glide
     implementation libs.androidx.lifecycle
     implementation libs.androidx.lifecycle.viewmodel
@@ -73,7 +93,6 @@ dependencies {
     kapt libs.roomCompiler
     implementation libs.workManager
     implementation libs.workManagerTesting
-    implementation libs.roboelectric
     implementation libs.paging
     implementation libs.roomPaging
 

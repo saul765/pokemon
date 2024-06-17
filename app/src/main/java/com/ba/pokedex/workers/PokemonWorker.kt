@@ -39,8 +39,6 @@ class PokemonWorker(private val context: Context, workerParams: WorkerParameters
                 for (i in COUNTER_START..NUMBER_OF_EXECUTIONS) {
                     val numberInPokedex = useCase.execute(offset, QUERY_LIMIT)
                     offset += QUERY_LIMIT
-                    Log.d("PokemonWorker", "Offset: $offset")
-                    Log.d("PokemonWorker", "Number in Pokedex: $numberInPokedex")
                     notificationService.showNotification(
                         context.getString(R.string.pokemon_worker_notification_title),
                         context.getString(

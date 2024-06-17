@@ -15,6 +15,7 @@ lifecycleViewmodel = "2.8.2"
 retrofit = "2.9.0"
 interceptor = "4.9.0"
 fragment = "1.8.0"
+fragmentTesting = "1.8.0"
 koin = "3.5.6"
 mockitoInline = "3.12.4"
 mockitoKotlin = "5.3.1"
@@ -30,9 +31,13 @@ workManager = "2.9.0"
 roboelectric = "4.9.2"
 junitKtx = "1.1.5"
 paging = "3.1.0"
+testRunner = "1.5.2"
+testRules = "1.5.0"
+coreTesting = "2.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+coreTesting = { group = "androidx.arch.core", name = "core-testing", version.ref = "coreTesting" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -47,6 +52,7 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "interceptor" }
 fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
+fragmentTesting = { group = "androidx.fragment", name = "fragment-testing", version.ref = "fragmentTesting" }
 koin = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koinWorkManager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin" }
 koinTest = { group = "io.insert-koin", name = "koin-test", version.ref = "koin" }
@@ -69,7 +75,8 @@ roboelectric = { group = "org.robolectric", name = "robolectric", version.ref = 
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 paging = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
 roomPaging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
-
+testRunner = { group = "androidx.test", name = "runner", version.ref = "testRunner" }
+testRules = { group = "androidx.test", name = "rules", version.ref = "testRules" }
 
 
 

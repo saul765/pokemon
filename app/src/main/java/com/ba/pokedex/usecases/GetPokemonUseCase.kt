@@ -25,7 +25,7 @@ class GetPokemonUseCase(private val pokemonRepository: IPokemonDataSource.Reposi
                 prefetchDistance = 3,
                 initialLoadSize = 15
             ),
-            pagingSourceFactory = { pokemonRepository.getPokemonsPaged2() }
+            pagingSourceFactory = { pokemonRepository.getPokemonsPaged() }
         ).flow.map { pagingData ->
             pagingData.map { pokemonEntity ->
                 pokemonEntity.toUIModel()
