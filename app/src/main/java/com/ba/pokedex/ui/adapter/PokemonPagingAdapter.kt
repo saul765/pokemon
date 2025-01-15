@@ -9,7 +9,7 @@ import com.ba.pokedex.domain.uimodel.PokemonItemUIModel
 
 class PokemonPagingAdapter(private val onItemClickListener: (PokemonItemUIModel) -> Unit) :
     BasePagedRecyclerViewAdapter<PokemonItemUIModel>(
-        null, PokemonPaginationItemCallback()
+        PokemonPaginationItemCallback()
     ) {
     override fun itemLayoutId(): Int = R.layout.item_pokemon
 

@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
@@ -131,6 +132,7 @@ class PokemonHomeFragment : BaseFragment<FragmentPokemonHomeBinding>() {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun loadAllPokemons() {
         val adapter = PokemonPagingAdapter {
+            Toast.makeText(requireContext(), it.name, Toast.LENGTH_SHORT).show()
         }
         dataBinding.rvPokemon.adapter = adapter.withLoadStateFooter(
             MainLoadStateAdapter()

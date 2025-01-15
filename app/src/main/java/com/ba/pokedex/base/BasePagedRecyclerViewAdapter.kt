@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 
 
 abstract class BasePagedRecyclerViewAdapter<T : Any>(
-    private val listener: BaseRecyclerViewAdapter.OnItemClickListener? = null,
     baseItemCallback: BaseItemCallback<T>
 ) : PagingDataAdapter<T, BaseRecyclerViewAdapter.BaseViewHolder>(baseItemCallback) {
 
@@ -29,7 +28,7 @@ abstract class BasePagedRecyclerViewAdapter<T : Any>(
             parent,
             false
         )
-        return BaseRecyclerViewAdapter.BaseViewHolder(dataBinding, itemToBindId(), listener)
+        return BaseRecyclerViewAdapter.BaseViewHolder(dataBinding, itemToBindId())
     }
 
     override fun onBindViewHolder(holder: BaseRecyclerViewAdapter.BaseViewHolder, position: Int) =
