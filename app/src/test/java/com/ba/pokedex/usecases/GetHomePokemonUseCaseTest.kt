@@ -5,7 +5,7 @@ import com.ba.pokedex.base.BaseUnitTest
 import com.ba.pokedex.data.EMPTY_CHARACTER
 import com.ba.pokedex.database.entity.PokemonEntity
 import com.ba.pokedex.domain.Pokemon
-import com.ba.pokedex.domain.PokemonItem
+import com.ba.pokedex.core.domain.PokemonItem
 import com.ba.pokedex.domain.PokemonResult
 import com.ba.pokedex.domain.Sprite
 import com.ba.pokedex.repositories.pokemon.IPokemonDataSource
@@ -23,9 +23,9 @@ import org.mockito.kotlin.whenever
 class GetHomePokemonUseCaseTest : BaseUnitTest() {
 
     private val pokemonRepository by lazy { declareMock<IPokemonDataSource.Repository>() }
-    private val pokemonHomeUseCaseMock by lazy { declareMock<GetHomePokemonUseCase>() }
+    private val pokemonHomeUseCaseMock by lazy { declareMock<com.ba.pokedex.core.usecases.GetHomePokemonUseCase>() }
 
-    private val pokemonHomeUseCase by inject<IGetHomePokemonUseCase>()
+    private val pokemonHomeUseCase by inject<com.ba.pokedex.core.usecases.IGetHomePokemonUseCase>()
 
     @Before
     fun setup() {
@@ -44,7 +44,7 @@ class GetHomePokemonUseCaseTest : BaseUnitTest() {
         )
 
         val pokemonItem =
-            PokemonItem(1, Sprite(), "bulbasaur")
+            com.ba.pokedex.core.domain.PokemonItem(1, Sprite(), "bulbasaur")
 
         runBlocking {
             doReturn(emptyList<PokemonEntity>()).whenever(pokemonRepository).getPokemonsLocal()

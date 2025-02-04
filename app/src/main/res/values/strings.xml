@@ -3,6 +3,22 @@
 
     <string name="pokemon_base_url">https://pokeapi.co/api/v2/</string>
 
+    <string name="local_default_loading_message">Loading…</string>
+
+    <string name="offline_mode_message">The internet connection has been lost, the app will work in offline mode</string>
+    <string name="online_mode_message">The internet connection has been restored, the app will work in online mode</string>
+
+    <!--Open settings-->
+    <string name="open_settings_uri">package</string>
+
+    <!-- Core Texts -->
+    <string name="icon_content_description_text">Example Icon</string>
+    <string name="app_icon_content_description">App Icon</string>
+
+    <string name="alert_dialog_error_title">Attention</string>
+    <string name="alert_dialog_accept">Accept</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+
     <string name="generic_error">An unexpected error occurred, please try again later</string>
     <string name="error_no_internet_connection_body">Make sure that the Wi-Fi connection or mobile data is active and try again.</string>
 
@@ -19,5 +35,31 @@
 
     <string name="pokemon_worker_error_notification_title">Pokedex Load Error</string>
     <string name="pokemon_worker_error_notification_body">An error occurred while trying to update the Pokédex, check you internet connection</string>
+
+
+    <!-- Network Error Messages -->
+    <string name="network_error_unauthorized">You are not authorized to make requests.</string>
+    <string name="network_error_unauthorized_action">Log out and try again.</string>
+    <string name="network_error_forbidden">You do not have access to this resource.</string>
+    <string name="network_error_forbidden_action">Contact the operations team.</string>
+    <string name="network_error_bad_request">The request is malformed.</string>
+    <string name="network_error_bad_request_action">The development team has been automatically informed.</string>
+    <string name="network_error_not_found">The requested petition was not found.</string>
+    <string name="network_error_not_found_action">The development team has been automatically informed.</string>
+    <string name="network_error_request_timeout">The maximum waiting time has been exceeded.</string>
+    <string name="network_error_request_timeout_action">Try again later.</string>
+    <string name="network_error_server">A server error occurred.</string>
+    <string name="network_error_server_action">The development team has been automatically informed.</string>
+    <string name="network_error_network">A network error occurred.</string>
+    <string name="network_error_network_action">Try again later.</string>
+    <string name="network_safe_request_error">The following error occurred:</string>
+    <string name="local_unexpected_error_message">An unexpected error occurred</string>
+    <string name="local_unexpected_error_description_message">The development team has been automatically informed.</string>
+
+    <string name="alert_dialog_permissions_title">Permisos</string>
+    <string name="alert_dialog_permissions_rationale_settings">Ajustes</string>
+    <string name="alert_dialog_permissions_accept">Aceptar</string>
+
+    <string name="pokemon_rationale_permission">The Pokédex needs access to notifications to catch some pokemons, please enable it on settings</string>
 
 </resources>

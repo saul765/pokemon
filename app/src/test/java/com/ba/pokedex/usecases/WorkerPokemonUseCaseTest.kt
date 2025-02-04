@@ -3,7 +3,7 @@ package com.ba.pokedex.usecases
 import com.ba.pokedex.base.BaseUnitTest
 import com.ba.pokedex.data.EMPTY_CHARACTER
 import com.ba.pokedex.domain.Pokemon
-import com.ba.pokedex.domain.PokemonItem
+import com.ba.pokedex.core.domain.PokemonItem
 import com.ba.pokedex.domain.PokemonResult
 import com.ba.pokedex.domain.Sprite
 import com.ba.pokedex.repositories.pokemon.IPokemonDataSource
@@ -37,7 +37,7 @@ class WorkerPokemonUseCaseTest : BaseUnitTest() {
         )
 
         val pokemonItem =
-            PokemonItem(1, Sprite(), "bulbasaur")
+            com.ba.pokedex.core.domain.PokemonItem(1, Sprite(), "bulbasaur")
 
         runBlocking {
 

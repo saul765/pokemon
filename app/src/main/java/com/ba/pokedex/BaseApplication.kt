@@ -1,7 +1,7 @@
 package com.ba.pokedex
 
 import android.app.Application
-import com.ba.pokedex.di.AppModule
+import com.ba.pokedex.core.di.AppModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
